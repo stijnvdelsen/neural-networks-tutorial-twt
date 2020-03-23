@@ -59,3 +59,32 @@ model.add(keras.layers.GlobalAveragePooling1D())
 model.add(keras.layers.Dense(16, activation="relu"))
 model.add(keras.layers.Dense(1, activation="sigmoid"))
 
+# I need to look up what this does.
+model.summary()
+
+# This will compile our model. The loss binary_crossentropy means that we have two possible outcomes.
+model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
+
+# We want to split up our training data for validating.
+x_val = train_data[:10000]
+x_train = train_data[10000:]
+
+y_val = train_labels[:10000]
+y_train = train_labels[10000:]
+
+# This will train our model. The param batch_size means how many reviews we are going to load into memory at once. Verbose means how detailed the ouput is to be printed.
+fitModel = model.fit(x_train, y_train, epochs=40, batch_size=512, validation_data=(x_val, y_val), verbose=1)
+
+# This will test our model on loss and accuracy
+results = model.evaluate(test_data, test_labels)
+
+print(results)
+
+# See the results below:
+
+test_review = test_data[0]
+predict = model.predict([test_review])
+print("Review: ")
+print(decode_review(test_review))
+print("Prediction: " + str(predict[0]))
+print("Actual: " + str(test_labels[0]))

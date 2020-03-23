@@ -86,5 +86,7 @@ test_review = test_data[0]
 predict = model.predict([test_review])
 print("Review: ")
 print(decode_review(test_review))
-print("Prediction: " + str(predict[0]))
+
+# We want to do a argmax on the prediction, otherwise we'll get a result that we can't compare as easy to the actual label
+print("Prediction: " + str(np.argmax(predict[0])))
 print("Actual: " + str(test_labels[0]))

@@ -59,7 +59,7 @@ model.add(keras.layers.GlobalAveragePooling1D())
 model.add(keras.layers.Dense(16, activation="relu"))
 model.add(keras.layers.Dense(1, activation="sigmoid"))
 
-# I need to look up what this does.
+# This provides a textual summary of the model and layers.
 model.summary()
 
 # This will compile our model. The loss binary_crossentropy means that we have two possible outcomes.
@@ -88,5 +88,5 @@ print("Review: ")
 print(decode_review(test_review))
 
 # We want to do a argmax on the prediction, otherwise we'll get a result that we can't compare as easy to the actual label
-print("Prediction: " + str(np.argmax(predict[0])))
+print("Prediction: " + str(predict[0]))
 print("Actual: " + str(test_labels[0]))
